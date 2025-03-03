@@ -1,4 +1,5 @@
-use fcp::{fatal, fcp};
+use fcp::graceful;
+use fcp::fcp;
 use std::env;
 use std::process;
 
@@ -24,11 +25,11 @@ OPTIONS:
 static VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn main() {
-    let args: Box<_> = env::args().skip(1).collect();
+    let args = env::args().skip(1).collect::<Vec<String>>();
     for arg in args.iter() {
         match arg.as_str() {
-            "-h" | "--help" => fatal(HELP),
-            "-V" | "--version" => fatal(VERSION),
+            "-h" | "--help" => graceful(HELP),
+            "-V" | "--version" => graceful(VERSION),
             _ => {}
         }
     }

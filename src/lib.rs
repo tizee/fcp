@@ -17,6 +17,11 @@ pub mod filesystem;
 use crate::error::{Error, Result};
 use crate::filesystem::{self as fs, FileType};
 
+pub fn graceful(message: impl Display) -> ! {
+    println!("{}", message);
+    process::exit(0);
+}
+
 pub fn fatal(message: impl Display) -> ! {
     eprintln!("{}", message);
     process::exit(1);
